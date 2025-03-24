@@ -12,26 +12,11 @@ class LocationsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Dio dio = Dio();
-    final LocationsRepository locationsRepository = LocationsRepository(
-      dio: dio,
-    );
-
     return Scaffold(
       backgroundColor: Colors.black,
-      body: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create:
-                (context) =>
-                    SearchBloc(locationsRepository: locationsRepository),
-          ),
-          BlocProvider(create: (context) => LocationsBloc()),
-        ],
-        child: SafeArea(
-          bottom: false,
-          child: Column(children: [TitledSearchBar(), LocalWeatherList()]),
-        ),
+      body: SafeArea(
+        bottom: false,
+        child: Column(children: [TitledSearchBar(), LocalWeatherList()]),
       ),
     );
   }

@@ -24,7 +24,7 @@ class NetworkError extends StatelessWidget {
           ),
         ),
         FilledButton(
-          onPressed: () => bloc.add(UpdateWeatherData()),
+          onPressed: () => bloc.add(UpdateWeatherData(lat: 0.0, lon: 0.0)),
           child: Text(
             WeatherAppStrings.refresh
           ),

@@ -1,36 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/data/model/locations/location.dart';
-import 'package:weather_app/data/model/weather/main_weather_info.dart';
+import 'package:weather_app/presentation/ui/pages/main_page.dart';
 import 'package:weather_app/presentation/ui/util/weather_app_strings.dart';
-
-import '../../../../data/model/weather/weather.dart';
 
 class LocalWeather extends StatelessWidget {
   const LocalWeather({
     super.key,
     required this.location,
     this.isMyLocation = false,
-    required this.onDismissed,
   });
 
   final Location location;
   final bool isMyLocation;
-  final VoidCallback onDismissed;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(15)),
-        color: Colors.lightBlueAccent,
+    return GestureDetector(
+      onTap: () => Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => WeatherPage(lon: location.lon.toDouble(), lat: location.lat.toDouble()))
       ),
-      margin: const EdgeInsets.symmetric(horizontal: 10),
-      padding: const EdgeInsets.all(16),
-      height: 150,
-      child: Dismissible(
-        onDismissed: (_) => onDismissed,
-        background: Container(color: Colors.red,),
-        key: ValueKey(location.id),
+      child: Container(
+        clipBehavior: Clip.antiAlias,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(15)),
+          color: Colors.lightBlueAccent,
+        ),
+        margin: const EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.all(16),
+        height: 150,
         child: Stack(
           fit: StackFit.expand,
           children: [

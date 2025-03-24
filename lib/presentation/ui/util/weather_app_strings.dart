@@ -25,4 +25,8 @@ class WeatherAppStrings {
 
   static const noLocationsFound = "No locations found";
 
+  static const noLocations = "No locations";
+
+  static const minSymbols = "Enter at least 3 symbols";
+
 }

@@ -23,11 +23,11 @@ class LocationSuggestion extends StatelessWidget {
         child: Row(
           spacing: 5,
           children: [
-            Icon(Icons.location_city, fill: 1.0, color: Colors.white60),
+            Icon(Icons.location_city, fill: 1.0, color: Colors.black),
             Text(
               "${location.name}, ${location.country}",
               style: TextStyle(
-                color: Colors.white60,
+                color: Colors.black,
                 fontWeight: FontWeight.w400,
                 fontSize: 20,
               ),

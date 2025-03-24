@@ -8,14 +8,13 @@ part 'locations_event.dart';
 part 'locations_state.dart';
 
 class LocationsBloc extends Bloc<LocationsEvent, LocationsState> {
-  final List<Location> _locations = List.of([]);
 
   LocationsBloc() : super(SavedLocations(locations: List.of([]))) {
     on<LocationsEvent>(
       (LocationsEvent event, Emitter<LocationsState> emit) => switch (event) {
         SaveLocation() => _onSaveLocation(event, emit),
         RemoveLocation() => _onRemoveLocation(event, emit),
-      },
+      }
     );
   }
 

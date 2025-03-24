@@ -27,6 +27,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     SearchLocations event,
     Emitter<SearchState> emit,
   ) async {
+
     if (event.query.isEmpty) {
       emit(NoSearchQuery());
       return;
@@ -38,17 +39,15 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     }
 
     try {
+
+      emit(LoadingLocations());
+
       final List<Location> locations = await _locationsRepository.getLocations(
         event.query,
       );
 
-      emit(
-        locations.isEmpty
-            ? NoLocationsFound()
-            : LocationsFound(locations: locations),
-      );
+      emit(LocationsFound(locations: locations));
     } catch (e) {
-      print(e);
       emit(NetworkError());
     }
   }

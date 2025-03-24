@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_app/data/model/weather/main_weather_info.dart';
-import 'package:weather_app/data/model/weather/weather.dart';
 import 'package:weather_app/domain/bloc/search/locations_bloc.dart';
+import 'package:weather_app/presentation/ui/util/weather_app_strings.dart';
 import 'package:weather_app/presentation/ui/widgets/locations_page_widgets/local_weather.dart';
 
 class LocalWeatherList extends StatefulWidget {
@@ -23,23 +22,24 @@ class _LocalWeatherListState extends State<LocalWeatherList> {
           return state.locations.isEmpty
               ? Center(
                 child: Text(
-                  "No locations",
+                  WeatherAppStrings.noLocations,
                   style: TextStyle(color: Colors.white),
                 ),
               )
               : ListView.separated(
                 shrinkWrap: true,
                 itemBuilder: (BuildContext context, int index) {
-                  return LocalWeather(
+                  return Dismissible(
+                    background: Container(color: Colors.red),
                     onDismissed:
-                        () => setState(() {
-                          () => bloc.add(
-                            RemoveLocation(location: state.locations[index]),
-                          );
-                        }),
-
-                    isMyLocation: false,
-                    location: state.locations[index],
+                        (_) => bloc.add(
+                          RemoveLocation(location: state.locations[index]),
+                        ),
+                    key: ValueKey<int>(index),
+                    child: LocalWeather(
+                      isMyLocation: false,
+                      location: state.locations[index],
+                    ),
                   );
                 },
                 separatorBuilder: (BuildContext context, int index) {

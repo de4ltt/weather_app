@@ -16,6 +16,7 @@ class DailyForecastContainer extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(20)),
       ),
       padding: const EdgeInsets.all(15),
+      margin: const EdgeInsets.only(bottom: 15),
       child: ListView.separated(
         physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,

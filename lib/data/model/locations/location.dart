@@ -8,8 +8,8 @@ class Location {
   final String country;
   final Weather weather;
   final MainWeatherInfo mainWeatherInfo;
-  final num lat;
-  final num lon;
+  final double lat;
+  final double lon;
 
   factory Location.fromJson(Map<String, dynamic> json) => Location(
     id: json['id'],
@@ -20,8 +20,8 @@ class Location {
             .map<Weather>((element) => Weather.fromJson(element))
             .toList()[0],
     mainWeatherInfo: MainWeatherInfo.fromJson(json['main']).metric,
-    lat: json['coord']['lat'] as num,
-    lon: json['coord']['lon'] as num,
+    lat: json['coord']['lat'].toDouble(),
+    lon: json['coord']['lon'].toDouble(),
   );
 
   @override

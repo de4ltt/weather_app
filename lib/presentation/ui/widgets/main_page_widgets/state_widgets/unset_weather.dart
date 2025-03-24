@@ -24,7 +24,7 @@ class UnsetWeather extends StatelessWidget {
           ),
         ),
         FilledButton(
-          onPressed: () => bloc.add(UpdateWeatherData()),
+          onPressed: () => bloc.add(UpdateWeatherData(lon: 0, lat: 0)),
           child: Text(
             WeatherAppStrings.refresh
           ),
