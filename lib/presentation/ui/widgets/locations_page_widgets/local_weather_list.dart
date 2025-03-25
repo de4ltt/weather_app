@@ -14,34 +14,35 @@ class LocalWeatherList extends StatelessWidget {
     return BlocBuilder<LocationsBloc, LocationsState>(
       builder: (context, state) {
         return switch (state) {
-          RetrievedLocations() => ListView.separated(
-            shrinkWrap: true,
-            itemBuilder: (BuildContext context, int index) {
-              return Dismissible(
-                background: Container(color: Colors.red),
-                onDismissed:
-                    (_) => bloc.add(
-                      RemoveLocation(location: state.locations[index]),
-                    ),
-                key: ValueKey<int>(index),
-                child: LocalWeather(
-                  isMyLocation: false,
-                  location: state.locations[index],
-                  onTap:
-                      () => bloc.add(
-                        SwitchFavouriteLocation(
-                          location: state.locations[index],
-                        ),
-                      ),
+          RetrievedLocations() =>
+            state.locations.isEmpty
+                ? Text(
+                  WeatherAppStrings.noLocations,
+                  style: TextStyle(color: Colors.white),
+                )
+                : ListView.separated(
+                  shrinkWrap: true,
+                  itemBuilder: (BuildContext context, int index) {
+                    return LocalWeather(
+                      isMyLocation: false,
+                      location: state.locations[index],
+                      onTap:
+                          () => bloc.add(
+                            SwitchFavouriteLocation(
+                              location: state.locations[index],
+                            ),
+                          ),
+                      widgetKey: ValueKey<int>(index),
+                    );
+                  },
+                  separatorBuilder: (BuildContext context, int index) {
+                    return SizedBox(height: 10);
+                  },
+                  itemCount: state.locations.length,
                 ),
-              );
-            },
-            separatorBuilder: (BuildContext context, int index) {
-              return SizedBox(height: 10);
-            },
-            itemCount: state.locations.length,
+          LoadingLocations() => CircularProgressIndicator(
+            color: Colors.lightBlueAccent,
           ),
-          LoadingLocations() => CircularProgressIndicator(),
           LocationsError() => Text(
             WeatherAppStrings.retrievalError,
             style: TextStyle(color: Colors.white),

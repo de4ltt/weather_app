@@ -79,11 +79,11 @@ class SavedLocationsRepository implements ISavedLocationsRepository {
   }
 
   @override
-  Future<bool> updateLocations(List<Location> locations) {
+  Future<bool> updateLocations(List<Location> locations) async {
     final locationsEncoded =
         locations.map((element) => jsonEncode(element.toJson())).toList();
 
-    return _sharedPreferences.setStringList(
+    return await _sharedPreferences.setStringList(
       _locationsListKey,
       locationsEncoded,
     );
