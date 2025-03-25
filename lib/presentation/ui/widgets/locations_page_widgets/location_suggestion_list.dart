@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/data/model/locations/location.dart';
 
-import '../../../../domain/bloc/search/locations_bloc.dart';
+import '../../../../domain/bloc/locations/locations_bloc.dart';
 import 'location_suggestion.dart';
 
 class LocationSuggestionList extends StatelessWidget {

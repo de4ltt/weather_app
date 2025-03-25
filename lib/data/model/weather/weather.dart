@@ -13,6 +13,13 @@ final class Weather {
     icon: json['icon'] as String,
   );
 
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'main': main,
+    'description': description,
+    'icon': icon,
+  };
+
   const Weather({
     required this.id,
     required this.main,

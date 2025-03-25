@@ -2,12 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/domain/bloc/search_query/search_bloc.dart';
 import 'package:weather_app/presentation/ui/util/weather_app_strings.dart';
-import 'package:weather_app/presentation/ui/widgets/locations_page_widgets/local_weather_list.dart';
-import 'package:weather_app/presentation/ui/widgets/locations_page_widgets/location_suggestion.dart';
 import 'package:weather_app/presentation/ui/widgets/locations_page_widgets/search_results.dart';
-
-import '../../../../data/model/locations/location.dart';
-import '../../../../domain/bloc/search/locations_bloc.dart';
 
 class TitledSearchBar extends StatefulWidget {
   const TitledSearchBar({super.key});

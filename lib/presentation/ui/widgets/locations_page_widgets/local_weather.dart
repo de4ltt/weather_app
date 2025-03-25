@@ -7,18 +7,26 @@ class LocalWeather extends StatelessWidget {
   const LocalWeather({
     super.key,
     required this.location,
-    this.isMyLocation = false,
+    this.isMyLocation = false, required this.onTap,
   });
 
   final Location location;
   final bool isMyLocation;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => WeatherPage(lon: location.lon.toDouble(), lat: location.lat.toDouble()))
-      ),
+      onTap:
+          () => Navigator.of(context).push(
+            MaterialPageRoute(
+              builder:
+                  (context) => WeatherPage(
+                    lon: location.lon.toDouble(),
+                    lat: location.lat.toDouble(),
+                  ),
+            ),
+          ),
       child: Container(
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
@@ -31,6 +39,17 @@ class LocalWeather extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
+            Align(
+              alignment: Alignment.bottomRight,
+              child: GestureDetector(
+                onTap: onTap,
+                child: Icon(
+                  location.isFavourite ? Icons.star : Icons.star_border,
+                  color: location.isFavourite ? Colors.orange : Colors.white,
+                  size: 30,
+                ),
+              ),
+            ),
             Align(
               alignment: Alignment.topLeft,
               child:

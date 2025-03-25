@@ -10,6 +10,7 @@ class Location {
   final MainWeatherInfo mainWeatherInfo;
   final double lat;
   final double lon;
+  final bool isFavourite;
 
   factory Location.fromJson(Map<String, dynamic> json) => Location(
     id: json['id'],
@@ -22,6 +23,42 @@ class Location {
     mainWeatherInfo: MainWeatherInfo.fromJson(json['main']).metric,
     lat: json['coord']['lat'].toDouble(),
     lon: json['coord']['lon'].toDouble(),
+    isFavourite: json['isFavourite'] ?? false,
+  );
+
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'name': name,
+    'sys': {'country': country},
+    'weather': [weather.toJson()],
+    'main': mainWeatherInfo.kelvin.toJson(),
+    'coord': {'lat': lat, 'lon': lon},
+    'isFavourite': isFavourite,
+  };
+
+  Location get switchFavourite => Location(
+    id: id,
+    weather: weather,
+    mainWeatherInfo: mainWeatherInfo,
+    name: name,
+    country: country,
+    lat: lat,
+    lon: lon,
+    isFavourite: !isFavourite,
+  );
+
+  Location copyWith({
+    required Weather weather,
+    required MainWeatherInfo mainWeatherInfo,
+  }) => Location(
+    id: id,
+    weather: weather,
+    mainWeatherInfo: mainWeatherInfo,
+    name: name,
+    country: country,
+    lat: lat,
+    lon: lon,
+    isFavourite: isFavourite,
   );
 
   @override
@@ -40,5 +77,6 @@ class Location {
     required this.country,
     required this.lat,
     required this.lon,
+    required this.isFavourite,
   });
 }

@@ -5,7 +5,7 @@ sealed class SearchState {}
 
 final class NoSearchQuery extends SearchState {}
 
-final class LoadingLocations extends SearchState {}
+final class SearchingLocations extends SearchState {}
 
 final class LocationsFound extends SearchState {
   final List<Location> locations;

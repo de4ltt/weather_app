@@ -9,6 +9,7 @@ class WeatherAppStrings {
   static const today = "Today";
   static const weather = "Weather";
   static const searchCity = "Search for a city or airport";
+  static const retrievalError = "Locations retrieval error";
 
 
   static const mon = "Mon";
